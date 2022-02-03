@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
+import axios from 'axios';
+
 import { EditOutlined, CloseOutlined, PlusOutlined } from '@ant-design/icons';
 
-import { Card, Checkbox, Progress, Button } from 'antd';
+import { Card, Progress, Button } from 'antd';
 import ListTasks from './ListTasks';
+import { deleteList } from '../apiPlatform';
 
 export default function ListCard(props) {
 
@@ -11,16 +14,7 @@ export default function ListCard(props) {
     let completed = 0
     let percent = 0
 
-    props.list.tasks.forEach(element => {
-        if (element.completed === true) {
-            completed = completed + 1
-            return completed
-        }
-    })
-
     percent = Math.round((completed * 100) / props.list.tasks.length)
-
-    //task completed
 
 
     return (
@@ -34,7 +28,8 @@ export default function ListCard(props) {
 
                 actions={[
                     <EditOutlined key="edit" />,
-                    <CloseOutlined key="delete" />,
+                    <CloseOutlined key="delete"
+                        onClick={() => deleteList(props.list.id, props.setLists)} />,
                 ]}
             >
 
@@ -46,8 +41,9 @@ export default function ListCard(props) {
 
                 {props.list.tasks.map(task => {
                     return (
-                        <ListTasks 
-                        task = {task}/>
+                        <ListTasks
+                            key={task.id}
+                            task={task} />
 
                     )
                 })}

@@ -1,4 +1,4 @@
-import axios from 'axios';
+
 import { useEffect, useState } from 'react';
 import './App.css';
 import ListCard from './components/ListCard';
@@ -6,6 +6,7 @@ import ListCard from './components/ListCard';
 import { Button, Spin } from 'antd';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import ListModal from './components/ListModal';
+import { getFirst } from './apiPlatform';
 
 
 function App() {
@@ -15,13 +16,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/api/todo_lists')
-      .then(response => setLists(response.data['hydra:member']))
-      .finally(() => setIsLoading(false))
+    getFirst(setLists, setIsLoading)
   }, []);
-
-  console.log(isLoading)
-
 
   return (
     <div className="App">
@@ -43,6 +39,7 @@ function App() {
             modalTitle="Ajouter une liste"
             setLists={setLists}
             isVisible={isModalVisible}
+            setIsLoading = {setIsLoading}
             handleCancel={() => setIsModalVisible(false)} />
         )}
 
@@ -56,6 +53,7 @@ function App() {
                   key={list.id}
                   list={list}
                   setLists={setLists}
+                  setIsLoading = {setIsLoading}
                 />
               )
             })}

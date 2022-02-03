@@ -23,9 +23,10 @@ export default function ListTasks(props) {
                 }
             )
         })
-            .then(res => console.log(res))
-            .then(function (res) {
-                if (res.redirected == '/') {
+            .then(response => response.json())
+            .then(response => console.log(response))
+            .then(function (response) {
+                if (response.redirected == '/') {
                     window.location = "/index"
                 }
             })

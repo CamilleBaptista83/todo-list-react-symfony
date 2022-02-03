@@ -3,6 +3,7 @@ import { Button, Modal } from 'antd';
 import ListForm from "./ListForm";
 
 import axios from 'axios';
+import { addList } from "../apiPlatform";
 
 
 export default function ListModal(props) {
@@ -14,18 +15,7 @@ export default function ListModal(props) {
 
     function handleSubmit() {
 
-        const list = {
-            "name": name,
-            "color": color,
-            "tasks": []
-        };
-
-        axios.post('http://127.0.0.1:8000/api/todo_lists', list)
-            .then(function (response) {
-                if (response.data.redirect == '/') {
-                    window.location = "/index"
-                }
-            })
+        addList(name, color, props.setLists)
 
         props.handleCancel();
     }
