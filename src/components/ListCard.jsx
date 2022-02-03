@@ -14,6 +14,13 @@ export default function ListCard(props) {
     let completed = 0
     let percent = 0
 
+    props.list.tasks.forEach(element => {
+        if (element.completed === true) {
+            completed = completed + 1
+            return completed
+        }
+    })
+
     percent = Math.round((completed * 100) / props.list.tasks.length)
 
 
@@ -27,7 +34,11 @@ export default function ListCard(props) {
                 style={{ width: 300 }}
 
                 actions={[
-                    <EditOutlined key="edit" />,
+                    <EditOutlined key="edit"
+                        onClick={() => {
+                            props.setIsModalVisible(true)
+                            props.setSelectedList(props.list)
+                        }} />,
                     <CloseOutlined key="delete"
                         onClick={() => deleteList(props.list.id, props.setLists)} />,
                 ]}
@@ -43,7 +54,8 @@ export default function ListCard(props) {
                     return (
                         <ListTasks
                             key={task.id}
-                            task={task} />
+                            task={task}
+                            setLists={props.setLists} />
 
                     )
                 })}
