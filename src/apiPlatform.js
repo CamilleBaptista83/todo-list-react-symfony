@@ -47,22 +47,24 @@ export function addList(name, color, setLists) {
 }
 
 
-export function addTask(title, idList, setLists) {
+export function addTask(title, id, setLists) {
     const task = {
         "title": title,
         "completed": false,
-        "list": idList
+        "list": '/api/todo_lists/'+ id
     };
 
-    axios.post('http://127.0.0.1:8000/api/todo_lists', task)
+    console.log(task)
+
+    axios.post('http://127.0.0.1:8000/api/tasks', task)
         .then(response => get(setLists))
 
 }
 
 export function modifyList(name, color, id, setLists) {
     let data = {
-        name : name,
-        color : color
+        name: name,
+        color: color
     };
 
     let config = {

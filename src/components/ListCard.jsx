@@ -1,14 +1,16 @@
-import React from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
 
 import { EditOutlined, CloseOutlined, PlusOutlined } from '@ant-design/icons';
 
 import { Card, Progress, Button } from 'antd';
 import ListTasks from './ListTasks';
 import { deleteList } from '../apiPlatform';
+import TaskModal from "./TaskModal";
+
 
 export default function ListCard(props) {
 
+    const [isModalTaskVisible, setIsModalTaskVisible] = useState(false);
 
     // ProgressBar
     let completed = 0
@@ -61,10 +63,25 @@ export default function ListCard(props) {
                 })}
 
                 <div className='mt-4'>
-                    <Button shape="round" icon={<PlusOutlined />} />
+                    <Button
+                        shape="round"
+                        icon={<PlusOutlined />}
+                        onClick={() => setIsModalTaskVisible(true)} />
                 </div>
 
             </Card>
+
+            {
+                //Modal pour l'ajout d'un liste
+                isModalTaskVisible && (
+                    <TaskModal
+                        modalTitle= 'ajouter une tâche'
+                        list = {props.list}
+                        isVisible={isModalTaskVisible}
+                        setLists={props.setLists}
+                        setIsModalTaskVisible={props.setIsModalTaskVisible}
+                        handleCancel={() => setIsModalTaskVisible(false)} />
+                )}
         </div>
     );
 }

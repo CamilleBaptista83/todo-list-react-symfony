@@ -1,26 +1,21 @@
 import React, { useState } from "react";
 import { Button, Modal } from 'antd';
-import ListForm from "./ListForm";
+import TaskForm from "./TaskForm";
+import { addTask } from "../apiPlatform";
 
-import { addList } from "../apiPlatform";
 
+export default function TaskModal(props) {
 
-export default function ListModal(props) {
-
-    const [name, setName] = useState("");
-    const [color, setColor] = useState("#3B97FF");
+    const [title, setTitle] = useState("");
     const [error, setError] = useState(null)
 
-
     function handleSubmit() {
-
-        addList(name, color, props.setLists)
-
-        props.handleCancel();
+        addTask(title, props.list.id, props.setLists)
     }
 
 
     return (
+
         <Modal
             title={props.modalTitle}
             visible={props.isVisible}
@@ -32,11 +27,9 @@ export default function ListModal(props) {
             ]}
         >
             {error && <p>Une erreur est survenue</p>}
-            <ListForm
-                name={name}
-                color={color}
-                setName={setName}
-                setColor={setColor} />
+            <TaskForm
+                title={title}
+                setTitle={setTitle}/>
         </Modal>
     );
 }
