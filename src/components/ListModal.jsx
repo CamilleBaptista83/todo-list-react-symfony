@@ -2,19 +2,23 @@ import React, { useState } from "react";
 import { Button, Modal } from 'antd';
 import ListForm from "./ListForm";
 
-import { addList } from "../apiPlatform";
+import { addList, modifyList } from "../apiPlatform";
 
 
 export default function ListModal(props) {
 
-    const [name, setName] = useState("");
-    const [color, setColor] = useState("#3B97FF");
+    const [name, setName] = useState(props.list ? props.list.name : "");
+    const [color, setColor] = useState(props.list ? props.list.color : "#3B97FF");
     const [error, setError] = useState(null)
 
 
     function handleSubmit() {
 
-        addList(name, color, props.setLists)
+        if (props.list) {
+            modifyList(name, color, props.list.id, props.setLists)
+        } else {
+            addList(name, color, props.setLists)
+        }
 
         props.handleCancel();
     }
@@ -27,7 +31,7 @@ export default function ListModal(props) {
             onCancel={props.handleCancel}
             footer={[
                 <Button type="primary" onClick={handleSubmit} >
-                    Créer
+                    {props.list ? "Modifier" : "Créer"}
                 </Button>
             ]}
         >

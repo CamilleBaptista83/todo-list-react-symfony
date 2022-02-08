@@ -29,12 +29,12 @@ export default function ListCard(props) {
     return (
         <Col span={6} >
             <div
-                className="site-card-border-less-wrapper m-3"
+                className="site-card-border-less-wrapper m-1"
                 style={{ borderTop: `20px solid ${props.list.color}` }}>
                 <Card
                     title={props.list.name}
                     bordered={false}
-                    
+
                     actions={[
                         <EditOutlined key="edit"
                             onClick={() => {
@@ -79,7 +79,7 @@ export default function ListCard(props) {
                             list={props.list}
                             isVisible={isModalTaskVisible}
                             setLists={props.setLists}
-                            setIsModalTaskVisible={props.setIsModalTaskVisible}
+                            setIsModalTaskVisible={setIsModalTaskVisible}
                             handleCancel={() => setIsModalTaskVisible(false)} />
                     )}
             </div>

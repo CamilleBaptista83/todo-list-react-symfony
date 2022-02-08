@@ -11,6 +11,7 @@ export default function TaskModal(props) {
 
     function handleSubmit() {
         addTask(title, props.list.id, props.setLists)
+        props.setIsModalTaskVisible(false)
     }
 
 

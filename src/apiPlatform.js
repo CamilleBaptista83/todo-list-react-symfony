@@ -1,62 +1,51 @@
 import axios from 'axios';
 import swal from 'sweetalert';
 
+const baseUrl = 'http://127.0.0.1:8000/api/'
+
+
+//Récupération des données
+
 export function getFirst(setLists, setIsLoading) {
-    axios.get('http://127.0.0.1:8000/api/todo_lists')
+    axios.get(baseUrl + 'todo_lists')
         .then(response => setLists(response.data['hydra:member']))
         .finally(() => setIsLoading(false))
 }
 
 export function get(setLists) {
-    axios.get('http://127.0.0.1:8000/api/todo_lists')
+    axios.get(baseUrl + 'todo_lists')
         .then(response => setLists(response.data['hydra:member']))
 }
 
+//Gestion des listes
 
 export function deleteList(idList, setLists) {
     swal({
-        title: "Are you sure?",
-        text: "Once deleted, you will not be able to recover this imaginary file!",
+        title: "Etes-vous sûr ?",
+        text: "Une fois que la liste est supprimée vous n'avez aucun moyen de récupérer les données",
         icon: "warning",
         buttons: true,
         dangerMode: true,
     })
         .then((willDelete) => {
             if (willDelete) {
-                axios.delete('http://127.0.0.1:8000/api/todo_lists/' + idList)
+                axios.delete(baseUrl + 'todo_lists/' + idList)
                     .then(response => get(setLists))
-                swal("Poof! Your imaginary file has been deleted!", {
+                swal("Votre liste a bien été supprimée", {
                     icon: "success",
                 });
-            } else {
-                swal("Your imaginary file is safe!");
             }
         });
 }
 
-export function addList(name, color, setLists) {
+export function addList(name, color, setLists, setIsModalTaskVisible) {
     const list = {
         "name": name,
         "color": color,
         "tasks": []
     };
 
-    axios.post('http://127.0.0.1:8000/api/todo_lists', list)
-        .then(response => get(setLists))
-
-}
-
-
-export function addTask(title, id, setLists) {
-    const task = {
-        "title": title,
-        "completed": false,
-        "list": '/api/todo_lists/'+ id
-    };
-
-    console.log(task)
-
-    axios.post('http://127.0.0.1:8000/api/tasks', task)
+    axios.post(baseUrl +'todo_lists', list)
         .then(response => get(setLists))
 
 }
@@ -67,17 +56,48 @@ export function modifyList(name, color, id, setLists) {
         color: color
     };
 
+    console.log(data)
+
     let config = {
         headers: {
             "Content-Type": "application/merge-patch+json"
         }
     }
 
-    axios.patch("http://127.0.0.1:8000/api/todo_lists/" + id, data, config)
+    axios.patch(baseUrl + "todo_lists/" + id, data, config)
         .then(response => get(setLists))
 
 }
 
+//Gestion des tâches
+
+export function addTask(title, id, setLists) {
+    const task = {
+        "title": title,
+        "completed": false,
+        "list": '/api/todo_lists/'+ id
+    };
+
+    console.log(task)
+
+    axios.post(baseUrl + 'tasks', task)
+        .then(response => get(setLists))
+
+}
+
+export function modifyTask(title, id, setLists) {
+    const task = {
+        "title": title,
+        "completed": false,
+        "list": '/api/todo_lists/'+ id
+    };
+
+    console.log(task)
+
+    axios.post(baseUrl + 'tasks', task)
+        .then(response => get(setLists))
+
+}
 
 export function completedTask(id, taskCompleted, setLists) {
     let data = {
@@ -90,7 +110,7 @@ export function completedTask(id, taskCompleted, setLists) {
         }
     }
 
-    axios.patch("http://127.0.0.1:8000/api/tasks/" + id, data, config)
+    axios.patch(baseUrl + "tasks/" + id, data, config)
         .then(response => get(setLists))
 
 }

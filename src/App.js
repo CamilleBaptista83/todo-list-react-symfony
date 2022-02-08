@@ -33,29 +33,35 @@ function App() {
           shape="round"
           icon={<PlusCircleOutlined />}
           size='large'
-          onClick={() => setIsModalVisible(true)}>
+          onClick={() => {
+            setSelectedList(null)
+            setIsModalVisible(true)
+            }}>
           Ajouter une liste
         </Button>
 
         <h2>Listes :</h2>
 
-        {isLoading ? <Spin /> : (
-          <Row gutter={[16, 16]}>
-            {lists.map(list => {
-              return (
-                <ListCard
-                  key={list.id}
-                  list={list}
-                  setLists={setLists}
-                  setIsLoading={setIsLoading}
-                  setSelectedList={setSelectedList}
-                  setIsModalVisible={setIsModalVisible}
-                />
-              )
-            })}
-          </Row>
-        )}
+        <div className='container'>
 
+          {isLoading ? <Spin /> : (
+            <Row gutter={[16, 16]}>
+              {lists.map(list => {
+                return (
+                  <ListCard
+                    key={list.id}
+                    list={list}
+                    setLists={setLists}
+                    setIsLoading={setIsLoading}
+                    setSelectedList={setSelectedList}
+                    setIsModalVisible={setIsModalVisible}
+                  />
+                )
+              })}
+            </Row>
+          )}
+
+        </div>
 
         {
           //Modal pour l'ajout d'un liste
@@ -65,7 +71,7 @@ function App() {
               setLists={setLists}
               isVisible={isModalVisible}
               setIsLoading={setIsLoading}
-              selectedList={selectedList}
+              list={selectedList}
               handleCancel={() => setIsModalVisible(false)} />
           )}
 
