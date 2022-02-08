@@ -1,9 +1,8 @@
-
 import { useEffect, useState } from 'react';
 import './App.css';
 import ListCard from './components/ListCard';
 
-import { Button, Spin } from 'antd';
+import { Button, Spin, Row } from 'antd';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import ListModal from './components/ListModal';
 import { getFirst } from './apiPlatform';
@@ -24,52 +23,53 @@ function App() {
 
   return (
     <div className="App">
-      <header className='App-header'>
+      <header className="App-header">
         <img src="https://img.icons8.com/nolan/150/approval.png" />
         <h1>Votre Gestionnaire de Listes</h1>
+
+        <Button
+          className='m-5'
+          type="primary"
+          shape="round"
+          icon={<PlusCircleOutlined />}
+          size='large'
+          onClick={() => setIsModalVisible(true)}>
+          Ajouter une liste
+        </Button>
+
+        <h2>Listes :</h2>
+
+        {isLoading ? <Spin /> : (
+          <Row gutter={[16, 16]}>
+            {lists.map(list => {
+              return (
+                <ListCard
+                  key={list.id}
+                  list={list}
+                  setLists={setLists}
+                  setIsLoading={setIsLoading}
+                  setSelectedList={setSelectedList}
+                  setIsModalVisible={setIsModalVisible}
+                />
+              )
+            })}
+          </Row>
+        )}
+
+
+        {
+          //Modal pour l'ajout d'un liste
+          isModalVisible && (
+            <ListModal
+              modalTitle={selectedList === null ? "Ajouter une liste" : "Modifier la liste"}
+              setLists={setLists}
+              isVisible={isModalVisible}
+              setIsLoading={setIsLoading}
+              selectedList={selectedList}
+              handleCancel={() => setIsModalVisible(false)} />
+          )}
+
       </header>
-
-      <Button
-        className='m-5'
-        type="primary"
-        shape="round"
-        icon={<PlusCircleOutlined />}
-        size='large'
-        onClick={() => setIsModalVisible(true)}>
-        Ajouter une liste
-      </Button>
-
-
-      {
-      //Modal pour l'ajout d'un liste
-      isModalVisible && (
-        <ListModal
-          modalTitle= {selectedList === null ? "Ajouter une liste" : "Modifier la liste"} 
-          setLists={setLists}
-          isVisible={isModalVisible}
-          setIsLoading={setIsLoading}
-          selectedList = {selectedList}
-          handleCancel={() => setIsModalVisible(false)} />
-      )}
-
-      <h2>Listes :</h2>
-
-      {isLoading ? <Spin /> : (
-        <div className='d-flex flex-wrap'>
-          {lists.map(list => {
-            return (
-              <ListCard
-                key={list.id}
-                list={list}
-                setLists={setLists}
-                setIsLoading={setIsLoading}
-                setSelectedList = {setSelectedList}
-                setIsModalVisible = {setIsModalVisible}
-              />
-            )
-          })}
-        </div>
-      )}
     </div>
   );
 }
