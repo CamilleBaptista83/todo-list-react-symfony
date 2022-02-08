@@ -11,6 +11,7 @@ import TaskModal from "./TaskModal";
 export default function ListCard(props) {
 
     const [isModalTaskVisible, setIsModalTaskVisible] = useState(false);
+    const [taskSelected, setTaskSelected] = useState(null);
 
     // ProgressBar
     let completed = 0
@@ -57,7 +58,10 @@ export default function ListCard(props) {
                             <ListTasks
                                 key={task.id}
                                 task={task}
-                                setLists={props.setLists} />
+                                setLists={props.setLists}
+                                taskSelected={taskSelected}
+                                setTaskSelected={setTaskSelected}
+                                setIsModalTaskVisible={setIsModalTaskVisible} />
 
                         )
                     })}
@@ -66,7 +70,10 @@ export default function ListCard(props) {
                         <Button
                             shape="round"
                             icon={<PlusOutlined />}
-                            onClick={() => setIsModalTaskVisible(true)} />
+                            onClick={() => {
+                                setIsModalTaskVisible(true)
+                                setTaskSelected(null)
+                                }} />
                     </div>
 
                 </Card>
@@ -75,10 +82,12 @@ export default function ListCard(props) {
                     //Modal pour l'ajout d'un liste
                     isModalTaskVisible && (
                         <TaskModal
-                            modalTitle='ajouter une tâche'
+                            modalTitle={taskSelected === null ? "Ajouter une tâche" : "Modifier la tâche"}
                             list={props.list}
                             isVisible={isModalTaskVisible}
                             setLists={props.setLists}
+                            taskSelected={taskSelected}
+                            setTaskSelected={setTaskSelected}
                             setIsModalTaskVisible={setIsModalTaskVisible}
                             handleCancel={() => setIsModalTaskVisible(false)} />
                     )}

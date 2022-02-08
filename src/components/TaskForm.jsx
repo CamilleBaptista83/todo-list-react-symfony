@@ -16,7 +16,7 @@ export default function TaskForm(props) {
     return (
         <Form>
             <label htmlFor="title">Titre</label>
-            <Input placeholder='Nom de la liste' name='title' id='title'
+            <Input placeholder='Nom de la liste' name='title' id='title' value={props.title}
                 onChange={handleChange}></Input>
         </Form>
     );

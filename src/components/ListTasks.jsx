@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { completedTask } from '../apiPlatform';
+import { completedTask, deleteTask } from '../apiPlatform';
 
 import { EditTwoTone, CloseCircleTwoTone } from '@ant-design/icons';
 
@@ -30,6 +30,10 @@ export default function ListTasks(props) {
                                     twoToneColor="#7cb305"
                                 />
                             }
+                            onClick={() => {
+                                props.setTaskSelected(props.task)
+                                props.setIsModalTaskVisible(true)
+                            }}
                         />,
                         ,
                         <Button
@@ -39,6 +43,10 @@ export default function ListTasks(props) {
                                     twoToneColor="#f5222d"
                                 />
                             }
+
+                            onClick={() => {
+                                deleteTask(props.task.id, props.setLists)
+                            }}
                         />
                     ]}
                 >

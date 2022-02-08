@@ -45,7 +45,7 @@ export function addList(name, color, setLists, setIsModalTaskVisible) {
         "tasks": []
     };
 
-    axios.post(baseUrl +'todo_lists', list)
+    axios.post(baseUrl + 'todo_lists', list)
         .then(response => get(setLists))
 
 }
@@ -75,7 +75,7 @@ export function addTask(title, id, setLists) {
     const task = {
         "title": title,
         "completed": false,
-        "list": '/api/todo_lists/'+ id
+        "list": '/api/todo_lists/' + id
     };
 
     console.log(task)
@@ -86,17 +86,38 @@ export function addTask(title, id, setLists) {
 }
 
 export function modifyTask(title, id, setLists) {
-    const task = {
-        "title": title,
-        "completed": false,
-        "list": '/api/todo_lists/'+ id
+    let data = {
+        title: title
     };
 
-    console.log(task)
+    let config = {
+        headers: {
+            "Content-Type": "application/merge-patch+json"
+        }
+    }
 
-    axios.post(baseUrl + 'tasks', task)
+    axios.patch(baseUrl + "tasks/" + id, data, config)
         .then(response => get(setLists))
 
+}
+
+export function deleteTask(idTask, setLists) {
+    swal({
+        title: "Etes-vous sûr ?",
+        text: "Une fois que la tâche est supprimée vous n'avez aucun moyen de récupérer les données",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+                axios.delete(baseUrl + 'tasks/' + idTask)
+                    .then(response => get(setLists))
+                swal("Votre tâche a bien été supprimée", {
+                    icon: "success",
+                });
+            }
+        });
 }
 
 export function completedTask(id, taskCompleted, setLists) {

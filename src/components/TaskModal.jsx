@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import { Button, Modal } from 'antd';
 import TaskForm from "./TaskForm";
-import { addTask } from "../apiPlatform";
+import { addTask, modifyTask } from "../apiPlatform";
 
 
 export default function TaskModal(props) {
 
-    const [title, setTitle] = useState("");
+    const [title, setTitle] = useState(props.taskSelected ? props.taskSelected.title : "");
     const [error, setError] = useState(null)
 
     function handleSubmit() {
-        addTask(title, props.list.id, props.setLists)
+        if (props.list) {
+            modifyTask(title, props.taskSelected.id, props.setLists)
+        } else {
+            addTask(title, props.list.id, props.setLists)
+        }
         props.setIsModalTaskVisible(false)
     }
 
@@ -23,7 +27,7 @@ export default function TaskModal(props) {
             onCancel={props.handleCancel}
             footer={[
                 <Button type="primary" onClick={handleSubmit} >
-                    Créer
+                    {props.taskSelected ? "Modifier" : "Créer"}
                 </Button>
             ]}
         >
