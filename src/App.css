@@ -127,6 +127,10 @@ button:hover {
     display:block;
   }
 
+  .button{
+    margin: 1rem 1rem;
+  }
+
   .btn-top .button:nth-child(1) {
     display:none;
   }
