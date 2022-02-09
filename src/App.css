@@ -3,6 +3,7 @@
 }
 
 .App-header, .App-header-light {
+  padding: 1rem;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -23,12 +24,12 @@ button:hover {
 }
 
 .ant-switch-checked{
-  background-color: #bebebe;
+  background-color: #e4e5f1;
 }
 
 /* Dark */
 .App-header {
-  background-color: #121212;
+  background-color: #262636;
   color: white!important;
 }
 
@@ -37,7 +38,7 @@ button:hover {
 .App-header .ant-card-head-title, 
 .App-header .ant-card-actions
 {
-  background-color:  #404040;
+  background-color:  #81879E;
   color: white!important;
 }
 .App-header span,
@@ -47,9 +48,16 @@ button:hover {
   color: white;
 }
 
+.App-header hr
+{
+  width: 70%;
+  height: 3px;
+  background-color: white;
+}
+
 /* Light */
 .App-header-light {
-  background-color: #aaaaaa;
+  background-color: #fafafa;
   color: #121212!important;
 }
 
@@ -58,7 +66,7 @@ button:hover {
 .App-header-light .ant-card-head-title, 
 .App-header-light .ant-card-actions
 {
-  background-color:  #ffffff;
+  background-color:  #e4e5f1;
   color: #121212!important;
 }
 .App-header-light span,
@@ -66,5 +74,13 @@ button:hover {
 .App-header-light h2
 {
   color: #121212;
+}
+
+.App-header-light hr
+{
+  width: 70%;
+  height: 3px;
+  background-color: #121212;
+  opacity: 1;
 }
 

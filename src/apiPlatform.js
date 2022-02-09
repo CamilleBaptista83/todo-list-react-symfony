@@ -78,8 +78,6 @@ export function addTask(title, id, setLists) {
         "list": '/api/todo_lists/' + id
     };
 
-    console.log(task)
-
     axios.post(baseUrl + 'tasks', task)
         .then(response => get(setLists))
 

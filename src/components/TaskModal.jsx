@@ -10,7 +10,7 @@ export default function TaskModal(props) {
     const [error, setError] = useState(null)
 
     function handleSubmit() {
-        if (props.list) {
+        if (props.taskSelected) {
             modifyTask(title, props.taskSelected.id, props.setLists)
         } else {
             addTask(title, props.list.id, props.setLists)

@@ -27,19 +27,21 @@ function App() {
 
   return (
     <div className="App">
-      <header className= {mode ? "App-header" : "App-header-light"} >
+      <header className={mode ? "App-header" : "App-header-light"} >
 
-        <Switch        
-        checkedChildren='Light'
-        unCheckedChildren="Dark" 
-        defaultChecked 
-        onChange = {() => {
-          setMode(!mode)
-          console.log(mode)
-          }}/>
+        <Switch
+          checkedChildren={<img src="https://img.icons8.com/external-justicon-flat-justicon/15/000000/external-sun-weather-justicon-flat-justicon-1.png"/>}
+          unCheckedChildren={<img src="https://img.icons8.com/external-justicon-flat-justicon/15/000000/external-moon-weather-justicon-flat-justicon-1.png" />}
+          defaultChecked
+          onChange={() => {
+            setMode(!mode)
+            console.log(mode)
+          }} />
 
         <img src="https://img.icons8.com/nolan/150/approval.png" />
         <h1>Votre Gestionnaire de Listes</h1>
+
+        <hr/>
 
         <Button
           style={{ backgroundColor: '#BB86FC', border: 'none' }}
@@ -54,8 +56,6 @@ function App() {
           }}>
           Ajouter une liste
         </Button>
-
-        <h2>Listes :</h2>
 
         <div className='container'>
 
