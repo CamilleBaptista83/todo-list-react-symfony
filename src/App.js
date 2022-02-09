@@ -7,10 +7,6 @@ import { PlusOutlined } from '@ant-design/icons';
 import ListModal from './components/ListModal';
 import { get, getByName, getFirst } from './apiPlatform';
 
-app.listen(8000, () => {
-  console.log(`App listening on http://localhost:8000`);
-});
-
 
 function App() {
 
