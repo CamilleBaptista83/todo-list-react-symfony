@@ -3,9 +3,9 @@ import './App.css';
 import ListCard from './components/ListCard';
 
 import { Button, Spin, Row, Switch } from 'antd';
-import { PlusCircleOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 import ListModal from './components/ListModal';
-import { getFirst } from './apiPlatform';
+import { get, getByName, getFirst } from './apiPlatform';
 
 
 function App() {
@@ -25,12 +25,13 @@ function App() {
     getFirst(setLists, setIsLoading)
   }, []);
 
+
   return (
     <div className="App">
       <header className={mode ? "App-header" : "App-header-light"} >
 
         <Switch
-          checkedChildren={<img src="https://img.icons8.com/external-justicon-flat-justicon/15/000000/external-sun-weather-justicon-flat-justicon-1.png"/>}
+          checkedChildren={<img src="https://img.icons8.com/external-justicon-flat-justicon/15/000000/external-sun-weather-justicon-flat-justicon-1.png" />}
           unCheckedChildren={<img src="https://img.icons8.com/external-justicon-flat-justicon/15/000000/external-moon-weather-justicon-flat-justicon-1.png" />}
           defaultChecked
           onChange={() => {
@@ -41,21 +42,64 @@ function App() {
         <img src="https://img.icons8.com/nolan/150/approval.png" />
         <h1>Votre Gestionnaire de Listes</h1>
 
-        <hr/>
+        <hr />
 
-        <Button
-          style={{ backgroundColor: '#BB86FC', border: 'none' }}
-          className='m-5'
-          shape="round"
-          icon={<PlusCircleOutlined
-            style={{ fontSize: '123%' }} />}
-          size='large'
-          onClick={() => {
-            setSelectedList(null)
-            setIsModalVisible(true)
-          }}>
-          Ajouter une liste
-        </Button>
+        {
+          //Bouton pour ajout de liste quand on ests sur téléphone
+        }
+        <div className='fixed-bottom'>
+          <Button
+            className='buttonQuery'
+            style={{ backgroundColor: '#BB86FC', border: 'none' }}
+            shape="circle"
+            icon={<PlusOutlined />}
+            onClick={() => {
+              setSelectedList(null)
+              setIsModalVisible(true)
+            }} />
+        </div>
+
+
+        <div className='btn-top'>
+
+
+          {//Ajouter une liste
+          }
+
+          <Button
+            className='button'
+            size='large'
+            onClick={() => {
+              setSelectedList(null)
+              setIsModalVisible(true)
+            }}
+          >
+            Ajouter une liste
+          </Button>
+
+          {//Filtre
+          }
+
+          <Button
+            className='button'
+            size='large'
+            onClick={() => {
+              getByName(setLists)
+            }}>
+            Trier par nom
+          </Button>
+
+
+          <Button
+            className='button'
+            size='large'
+            onClick={() => {
+              get(setLists)
+            }}>
+            Le plus récent
+          </Button>
+
+        </div>
 
         <div className='container'>
 

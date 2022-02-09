@@ -17,6 +17,11 @@ export function get(setLists) {
         .then(response => setLists(response.data['hydra:member']))
 }
 
+export function getByName(setLists) {
+    axios.get(baseUrl + 'todo_lists?order%5Bname%5D=asc')
+        .then(response => setLists(response.data['hydra:member']))
+}
+
 //Gestion des listes
 
 export function deleteList(idList, setLists) {

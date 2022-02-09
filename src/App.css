@@ -12,8 +12,40 @@
   font-size: calc(10px + 2vmin);
 }
 
+.btn-top{
+  width: 100%;
+  display: flex ;
+  justify-content: space-around;
+  margin: 1rem 0
+}
+
+.button{
+  background-color: #BB86FC; 
+  border: none;
+  margin: 0 25px;
+}
+
+.button:hover{
+  background-color: #BB86FC;
+  transform: scale(115%);
+}
+
 button:hover {
   transform: scale(120%);
+}
+
+.buttonQuery{
+  display: none;
+  z-index: 20;
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  width: 3rem;
+  height: 3rem;
+}
+
+.buttonQuery span{
+  font-size: 120%;
 }
 
 .ant-switch{
@@ -25,6 +57,10 @@ button:hover {
 
 .ant-switch-checked{
   background-color: #e4e5f1;
+}
+
+.ant-list-item-action{
+  margin-left: 0;
 }
 
 /* Dark */
@@ -84,3 +120,18 @@ button:hover {
   opacity: 1;
 }
 
+/* query */
+
+@media screen and (max-width: 600px) {
+  .btn-top {
+    display:block;
+  }
+
+  .btn-top .button:nth-child(1) {
+    display:none;
+  }
+
+  .buttonQuery{
+    display: block;
+  }
+}
