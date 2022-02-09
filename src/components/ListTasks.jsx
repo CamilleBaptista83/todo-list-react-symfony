@@ -20,14 +20,14 @@ export default function ListTasks(props) {
     return (
         <div className='m-2'>
             <List>
-
                 <List.Item
                     actions={[
                         <Button
                             type="text"
                             icon={
                                 <EditTwoTone key="edit"
-                                    twoToneColor="#7cb305"
+                                    twoToneColor="#B3B3B3"
+                                    style={{ fontSize: '123%'}}
                                 />
                             }
                             onClick={() => {
@@ -40,7 +40,8 @@ export default function ListTasks(props) {
                             type="text"
                             icon={
                                 <CloseCircleTwoTone key="delete"
-                                    twoToneColor="#f5222d"
+                                    twoToneColor="#B3B3B3"
+                                    style={{ fontSize: '120%'}}
                                 />
                             }
 

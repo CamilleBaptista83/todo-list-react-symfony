@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { EditOutlined, CloseOutlined, PlusOutlined } from '@ant-design/icons';
+import { EditTwoTone, CloseCircleTwoTone, PlusOutlined } from '@ant-design/icons';
 
 import { Card, Progress, Button, Col } from 'antd';
 import ListTasks from './ListTasks';
@@ -28,7 +28,7 @@ export default function ListCard(props) {
 
 
     return (
-        <Col span={6} >
+        <Col span={6} xs={24} sm={12} xl={6}>
             <div
                 className="site-card-border-less-wrapper m-1"
                 style={{ borderTop: `20px solid ${props.list.color}` }}>
@@ -37,12 +37,14 @@ export default function ListCard(props) {
                     bordered={false}
 
                     actions={[
-                        <EditOutlined key="edit"
+                        <EditTwoTone key="edit"
+                            twoToneColor="#B3B3B3"
                             onClick={() => {
                                 props.setIsModalVisible(true)
                                 props.setSelectedList(props.list)
                             }} />,
-                        <CloseOutlined key="delete"
+                        <CloseCircleTwoTone key="delete"
+                            twoToneColor="#B3B3B3"
                             onClick={() => deleteList(props.list.id, props.setLists)} />,
                     ]}
                 >
@@ -68,12 +70,13 @@ export default function ListCard(props) {
 
                     <div className='mt-4'>
                         <Button
-                            shape="round"
+                            style={{ backgroundColor: '#BB86FC', border: 'none' }}
+                            shape="circle"
                             icon={<PlusOutlined />}
                             onClick={() => {
                                 setIsModalTaskVisible(true)
                                 setTaskSelected(null)
-                                }} />
+                            }} />
                     </div>
 
                 </Card>

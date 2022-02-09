@@ -2,37 +2,69 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.App-header, .App-header-light {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
+}
+
+button:hover {
+  transform: scale(120%);
+}
+
+.ant-switch{
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: #404040;
+}
+
+.ant-switch-checked{
+  background-color: #bebebe;
+}
+
+/* Dark */
+.App-header {
+  background-color: #121212;
+  color: white!important;
+}
+
+.App-header .ant-card, 
+.App-header .ant-checkbox-wrapper, 
+.App-header .ant-card-head-title, 
+.App-header .ant-card-actions
+{
+  background-color:  #404040;
+  color: white!important;
+}
+.App-header span,
+.App-header h1, 
+.App-header h2
+{
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* Light */
+.App-header-light {
+  background-color: #aaaaaa;
+  color: #121212!important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.App-header-light .ant-card, 
+.App-header-light .ant-checkbox-wrapper, 
+.App-header-light .ant-card-head-title, 
+.App-header-light .ant-card-actions
+{
+  background-color:  #ffffff;
+  color: #121212!important;
 }
+.App-header-light span,
+.App-header-light h1, 
+.App-header-light h2
+{
+  color: #121212;
+}
+

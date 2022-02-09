@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import ListCard from './components/ListCard';
 
-import { Button, Spin, Row } from 'antd';
+import { Button, Spin, Row, Switch } from 'antd';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import ListModal from './components/ListModal';
 import { getFirst } from './apiPlatform';
@@ -17,26 +17,41 @@ function App() {
   const [selectedList, setSelectedList] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  //DarkMode 
+
+  const [mode, setMode] = useState(true)
+
   useEffect(() => {
     getFirst(setLists, setIsLoading)
   }, []);
 
   return (
     <div className="App">
-      <header className="App-header">
+      <header className= {mode ? "App-header" : "App-header-light"} >
+
+        <Switch        
+        checkedChildren='Light'
+        unCheckedChildren="Dark" 
+        defaultChecked 
+        onChange = {() => {
+          setMode(!mode)
+          console.log(mode)
+          }}/>
+
         <img src="https://img.icons8.com/nolan/150/approval.png" />
         <h1>Votre Gestionnaire de Listes</h1>
 
         <Button
+          style={{ backgroundColor: '#BB86FC', border: 'none' }}
           className='m-5'
-          type="primary"
           shape="round"
-          icon={<PlusCircleOutlined />}
+          icon={<PlusCircleOutlined
+            style={{ fontSize: '123%' }} />}
           size='large'
           onClick={() => {
             setSelectedList(null)
             setIsModalVisible(true)
-            }}>
+          }}>
           Ajouter une liste
         </Button>
 
@@ -45,7 +60,7 @@ function App() {
         <div className='container'>
 
           {isLoading ? <Spin /> : (
-            <Row gutter={[16, 16]}>
+            <Row gutter={[16, 16]} className='mt-3'>
               {lists.map(list => {
                 return (
                   <ListCard
