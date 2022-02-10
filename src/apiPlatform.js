@@ -1,7 +1,7 @@
 import axios from 'axios';
 import swal from 'sweetalert';
 
-const baseUrl = 'http://127.0.0.1:8000/api/'
+const baseUrl = 'https://todo-list-symfony-api.herokuapp.com/api/'
 
 
 //Récupération des données
