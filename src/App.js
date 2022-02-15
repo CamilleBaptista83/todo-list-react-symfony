@@ -6,11 +6,11 @@ import Home from './Home.js'
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />}></Route>
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
 
